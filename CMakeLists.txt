@@ -61,7 +61,6 @@ include_directories(third-party-ndk/boost/boost_1_63_0/)
 include_directories(ReactCommon/)
 include_directories(first-party/fb/include)
 include_directories(first-party/fbgloginit/)
-include_directories(/home/sanyinchen/Android/Sdk/ndk-bundle/my-android-toolchain/sysroot/usr/include)
 
 add_subdirectory(third-party-ndk/boost)
 add_subdirectory(third-party-ndk/glog)

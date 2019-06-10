@@ -9,6 +9,10 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIE")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fPIE -pie")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DANDROID")
+set(FOLLY_FLAGS "${FOLLY_FLAGS} -DFOLLY_NO_CONFIG -DFOLLY_HAVE_CLOCK_GETTIME -DFOLLY_HAVE_MEMRCHR -DFOLLY_USE_LIBCPP")
+set(FOLLY_FLAGS "${FOLLY_FLAGS} -DFOLLY_HAVE_XSI_STRERROR_R")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${FOLLY_FLAGS}")
+
 set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
 
 message(PARENT_CMAKE_C_FLAGS：${CMAKE_C_FLAGS})
@@ -16,10 +20,28 @@ message(PARENT_CMAKE_C_FLAGS：${CMAKE_C_FLAGS})
 # 配置使用 NDK Standalone Toolchain 编译
 set(NDK_STANDALONE_TOOLCHAIN /home/sanyinchen/Android/Sdk/ndk-bundle/my-android-toolchain)
 set(CMAKE_SYSTEM_NAME "armeabi-v7a x86 arm64-v8a x86_64")
+#set(CMAKE_SYSTEM_NAME CustomAndroid)
 
 set(CMAKE_SYSTEM_VERSION 16)
-set(CMAKE_C_COMPILER ${NDK_STANDALONE_TOOLCHAIN}/bin/arm-linux-androideabi-gcc)
-set(CMAKE_CXX_COMPILER ${NDK_STANDALONE_TOOLCHAIN}/bin/arm-linux-androideabi-g++)
+set(CMAKE_C_COMPILER ${NDK_STANDALONE_TOOLCHAIN}/bin/clang)
+set(CMAKE_CXX_COMPILER ${NDK_STANDALONE_TOOLCHAIN}/bin/clang++)
+
+message(CMAKE_CXX_COMPILER:${CMAKE_CXX_COMPILER})
+message(CMAKE_C_COMPILER:${CMAKE_C_COMPILER})
+
+message(STATUS "===> Is the C++ compiler loaded? ${CMAKE_CXX_COMPILER_LOADED}")
+if (CMAKE_CXX_COMPILER_LOADED)
+    message(STATUS "===> The C++ compiler ID is: ${CMAKE_CXX_COMPILER_ID}")
+    message(STATUS "===> Is the C++ from GNU? ${CMAKE_COMPILER_IS_GNUCXX}")
+    message(STATUS "===> The C++ compiler version is: ${CMAKE_CXX_COMPILER_VERSION}")
+endif ()
+message(STATUS "Is the C compiler loaded? ${CMAKE_C_COMPILER_LOADED}")
+if (CMAKE_C_COMPILER_LOADED)
+    message(STATUS "===> The C compiler ID is: ${CMAKE_C_COMPILER_ID}")
+    message(STATUS "===> Is the C from GNU? ${CMAKE_COMPILER_IS_GNUCC}")
+    message(STATUS "===> The C compiler version is: ${CMAKE_C_COMPILER_VERSION}")
+endif ()
+
 
 #choose Android ABI. Mine is armeabi-v7a
 set(CMAKE_ANDROID_ARCH_ABI armeabi-v7a)
@@ -28,6 +50,21 @@ set(CMAKE_FIND_ROOT_PATH ${NDK_STANDALONE_TOOLCHAIN})
 
 # 使用 NDK 提供的头文件
 add_definitions("--sysroot=${NDK_STANDALONE_TOOLCHAIN}/sysroot")
+include_directories(third-party-ndk/folly/)
+include_directories(third-party-ndk/double-conversion/)
+include_directories(third-party-ndk/)
+include_directories(third-party-ndk/glog/exported/)
+include_directories(third-party-ndk/boost/boost_1_63_0/)
+
+include_directories(ReactCommon/)
+include_directories(first-party/fb/include)
+include_directories(first-party/fbgloginit/)
+
+add_subdirectory(third-party-ndk/boost)
+add_subdirectory(third-party-ndk/glog)
+add_subdirectory(third-party-ndk/double-conversion)
+add_subdirectory(third-party-ndk/folly)
+
 
 add_subdirectory(first-party/fb)
 add_subdirectory(ReactCommon/cxxreact)

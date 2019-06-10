@@ -6,7 +6,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fexceptions -frtti -Wno-unused-lambda-captu
 set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
 
 include_directories(..)
-include_directories(../../third-party-ndk/folly/)
+
 
 file(GLOB SOURCE ./*.cpp)
 add_library(reactnative

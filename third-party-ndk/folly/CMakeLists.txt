@@ -1,5 +1,18 @@
 
-add_library(boost
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fexceptions -fno-omit-frame-pointer -frtti -Wno-sign-compare")
+set(FOLLY_FLAGS "${FOLLY_FLAGS} -DFOLLY_NO_CONFIG -DFOLLY_HAVE_CLOCK_GETTIME -DFOLLY_HAVE_MEMRCHR -DFOLLY_USE_LIBCPP")
+set(FOLLY_FLAGS "${FOLLY_FLAGS} -DFOLLY_HAVE_XSI_STRERROR_R")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${FOLLY_FLAGS}")
+
+message(==========>FOLLY_CMAKE_C_FLAGS:${CMAKE_C_FLAGS})
+
+
+include_directories(./)
+include_directories(../double-conversion/)
+
+add_library(folly_json
+        SHARED
         folly/json.cpp
         folly/Unicode.cpp
         folly/Conv.cpp
@@ -15,3 +28,8 @@ add_library(boost
         folly/container/detail/F14Table.cpp
         folly/ScopeGuard.cpp
         )
+
+target_link_libraries(folly_json
+        glog
+        double-conversion
+        boost)

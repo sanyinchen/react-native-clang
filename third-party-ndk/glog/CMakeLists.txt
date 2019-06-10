@@ -1,8 +1,13 @@
 
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wwrite-strings -Woverloaded-virtual -Wno-sign-compare -DNDEBUG -g -O2
--D_START_GOOGLE_NAMESPACE_=\"namespace google {\" -D_END_GOOGLE_NAMESPACE_=\"}\" -DHAVE_PREAD=1")
-set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wwrite-strings")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Woverloaded-virtual")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-sign-compare")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DNDEBUG")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_START_GOOGLE_NAMESPACE_=\"namespace google {\" -D_END_GOOGLE_NAMESPACE_=\"}\" -DHAVE_PREAD=1 ")
+set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
 
 
 include_directories(./)

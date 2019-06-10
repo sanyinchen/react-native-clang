@@ -29,6 +29,8 @@ set(CMAKE_CXX_COMPILER ${NDK_STANDALONE_TOOLCHAIN}/bin/clang++)
 message(CMAKE_CXX_COMPILER:${CMAKE_CXX_COMPILER})
 message(CMAKE_C_COMPILER:${CMAKE_C_COMPILER})
 
+set(CMAKE_CXX_STANDARD 14)
+
 message(STATUS "===> Is the C++ compiler loaded? ${CMAKE_CXX_COMPILER_LOADED}")
 if (CMAKE_CXX_COMPILER_LOADED)
     message(STATUS "===> The C++ compiler ID is: ${CMAKE_CXX_COMPILER_ID}")
@@ -59,6 +61,7 @@ include_directories(third-party-ndk/boost/boost_1_63_0/)
 include_directories(ReactCommon/)
 include_directories(first-party/fb/include)
 include_directories(first-party/fbgloginit/)
+include_directories(/home/sanyinchen/Android/Sdk/ndk-bundle/my-android-toolchain/sysroot/usr/include)
 
 add_subdirectory(third-party-ndk/boost)
 add_subdirectory(third-party-ndk/glog)

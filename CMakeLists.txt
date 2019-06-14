@@ -52,6 +52,7 @@ set(CMAKE_FIND_ROOT_PATH ${NDK_STANDALONE_TOOLCHAIN})
 
 # 使用 NDK 提供的头文件
 add_definitions("--sysroot=${NDK_STANDALONE_TOOLCHAIN}/sysroot")
+include_directories(${NDK_STANDALONE_TOOLCHAIN}/sysroot/usr/include)
 include_directories(third-party-ndk/folly/)
 include_directories(third-party-ndk/double-conversion/)
 include_directories(third-party-ndk/)

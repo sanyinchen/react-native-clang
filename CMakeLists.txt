@@ -60,8 +60,10 @@ include_directories(third-party-ndk/glog/exported/)
 include_directories(third-party-ndk/boost/boost_1_63_0/)
 
 include_directories(ReactCommon/)
+include_directories(ReactCommon/jsiexecutor)
 include_directories(first-party/fb/include)
 include_directories(first-party/fbgloginit/)
+include_directories(.)
 
 add_subdirectory(third-party-ndk/boost)
 add_subdirectory(third-party-ndk/glog)
@@ -72,6 +74,7 @@ add_subdirectory(third-party-ndk/folly)
 add_subdirectory(first-party/fb)
 add_subdirectory(ReactCommon/cxxreact)
 add_subdirectory(react/jni)
+add_subdirectory(jscexecutor)
 
 
 #
